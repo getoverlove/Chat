@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Parse
 
 struct LoginView: View {
     let didCompleteLoginProcess: () -> ()  //如果其他地方调用了LoginView，通过此函数直接返回
@@ -126,6 +127,20 @@ struct LoginView: View {
 
     
     private func createNewAccount() {
+        let friend = PFObject(className: "Contact")
+        friend["firstname"] = "skxu"
+        
+        
+        friend.saveInBackground { (successful, error) -> Void in
+            if successful {
+                print("yes")
+            }
+            else
+            {
+                print("no")
+                
+            }
+        }
 //        if self.image == nil {
 //            self.loginStatusMessage = "You must select an image"
 //            return
