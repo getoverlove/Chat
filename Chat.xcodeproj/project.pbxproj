@@ -13,7 +13,6 @@
 		CEEA7B632987EC14005BFE28 /* ChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA7B622987EC14005BFE28 /* ChatApp.swift */; };
 		CEEA7B672987EC16005BFE28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEA7B662987EC16005BFE28 /* Assets.xcassets */; };
 		CEEA7B6A2987EC16005BFE28 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEA7B692987EC16005BFE28 /* Preview Assets.xcassets */; };
-		CEEA7B712987EC69005BFE28 /* Views in Resources */ = {isa = PBXBuildFile; fileRef = CEEA7B702987EC69005BFE28 /* Views */; };
 		CEEA7B732987EDFB005BFE28 /* Model in Resources */ = {isa = PBXBuildFile; fileRef = CEEA7B722987EDFB005BFE28 /* Model */; };
 /* End PBXBuildFile section */
 
@@ -26,7 +25,6 @@
 		CEEA7B622987EC14005BFE28 /* ChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApp.swift; sourceTree = "<group>"; };
 		CEEA7B662987EC16005BFE28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEEA7B692987EC16005BFE28 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		CEEA7B702987EC69005BFE28 /* Views */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Views; sourceTree = "<group>"; };
 		CEEA7B722987EDFB005BFE28 /* Model */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Model; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,7 +82,6 @@
 				CEEA7B622987EC14005BFE28 /* ChatApp.swift */,
 				CEC2DEA629882CE40050EED7 /* LoginView.swift */,
 				CEEA7B722987EDFB005BFE28 /* Model */,
-				CEEA7B702987EC69005BFE28 /* Views */,
 				CEEA7B662987EC16005BFE28 /* Assets.xcassets */,
 				CEEA7B682987EC16005BFE28 /* Preview Content */,
 			);
@@ -165,7 +162,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEEA7B712987EC69005BFE28 /* Views in Resources */,
 				CEEA7B6A2987EC16005BFE28 /* Preview Assets.xcassets in Resources */,
 				CEEA7B732987EDFB005BFE28 /* Model in Resources */,
 				CEEA7B672987EC16005BFE28 /* Assets.xcassets in Resources */,

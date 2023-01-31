@@ -9,15 +9,28 @@ import SwiftUI
 import Parse
 
 struct LoginView: View {
-    let didCompleteLoginProcess: () -> ()  //如果其他地方调用了LoginView，通过此函数直接返回
+    //    let didCompleteLoginProcess: () -> ()  //如果其他地方调用了LoginView，通过此函数直接返回
     
     @State private var isLoginMode = false
     @State private var email = ""
     @State private var password = ""
     @State private var loginStatusMessage = ""
     @State private var shouldShowImagePicker = false
-//    init() {
-//    }
+    
+    init(){
+        if Parse.currentConfiguration == nil {
+            
+                    let parseConfig = ParseClientConfiguration {
+                        $0.applicationId = "APPLICATION_ID"
+                        $0.clientKey = "skxu1"
+                        $0.server = "http://localhost:1337/parse"
+                    }
+                    Parse.initialize(with: parseConfig)
+                    print("app set config ok")
+        }
+        
+    }
+    
     
     var body: some View {
         NavigationView{
@@ -94,9 +107,9 @@ struct LoginView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         //Image picker,
-//        .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {
-//            ImagePicker(image: $image)
-//        }
+        //        .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {
+        //            ImagePicker(image: $image)
+        //        }
     }
     
     @State var image: UIImage?
@@ -111,107 +124,118 @@ struct LoginView: View {
         }
     }
     private func loginUser() {
-//        FirebaseManager.shared.auth.signIn(withEmail: email, password: password) { result, err in
-//            if let err = err {
-//                print("Failed to login usr:", err)
-//                self.loginStatusMessage = "Failed to login usr: \(err)"
-//                return
-//            }
-//
-//            print("Successfully logged usr: \(result?.user.uid ?? "")")
-//            self.loginStatusMessage = "Successfully logged to Create usr: \(result?.user.uid ?? "")"
-//
-//            self.didCompleteLoginProcess()
-        }
+        //        FirebaseManager.shared.auth.signIn(withEmail: email, password: password) { result, err in
+        //            if let err = err {
+        //                print("Failed to login usr:", err)
+        //                self.loginStatusMessage = "Failed to login usr: \(err)"
+        //                return
+        //            }
+        //
+        //            print("Successfully logged usr: \(result?.user.uid ?? "")")
+        //            self.loginStatusMessage = "Successfully logged to Create usr: \(result?.user.uid ?? "")"
+        //
+        //            self.didCompleteLoginProcess()
     }
+}
 
-    
-    private func createNewAccount() {
-        let friend = PFObject(className: "Contact")
-        friend["firstname"] = "skxu"
-        
-        
-        friend.saveInBackground { (successful, error) -> Void in
-            if successful {
-                print("yes")
-            }
-            else
-            {
-                print("no")
-                
-            }
+
+private func createNewAccount() {
+    let gameScore = PFObject(className:"GameScore")
+    gameScore["score"] = 1337
+    gameScore["playerName"] = "Sean Plott"
+    gameScore["cheatMode"] = false
+    gameScore.saveInBackground { (succeeded, error)  in
+        if (succeeded) {
+            // The object has been saved.
+        } else {
+            // There was a problem, check error.description
         }
-//        if self.image == nil {
-//            self.loginStatusMessage = "You must select an image"
-//            return
-//        }
-//        FirebaseManager.shared.auth.createUser(withEmail: email, password: password) {
-//            result, err in
-//            if let err = err {
-//                print("Failed to create usr:", err)
-//                self.loginStatusMessage = "Failed to Create usr: \(err)"
-//                return
-//            }
-//
-//            print("Successfully Create usr: \(result?.user.uid ?? "")")
-//            self.loginStatusMessage = "Successfully Created to Create usr: \(result?.user.uid ?? "")"
-//
-//            self.persistImageToStorage()
-//
-//        }
     }
+    //        let friend = PFObject(className: "Contact")
+    //
+    //        friend["firstname"] = "skxu"
+    //        friend.saveInBackground(with: PFBooleanResultBlock)
     
-    private func persistImageToStorage() {
-////        let filename = UUID().uuidString
-//        guard let uid = FirebaseManager.shared.auth.currentUser?.uid
-//        else {return}
-//        let ref = FirebaseManager.shared.storage.reference(withPath: uid)
-//        guard let imageData = self.image?.jpegData(compressionQuality: 0.5)
-//        else{return}
-//        ref.putData(imageData, metadata: nil) { metadata, err in
-//            if let err = err {
-//                self.loginStatusMessage = "Failed to push image to Storage: \(err)"
-//                return
-//            }
-//
-//            ref.downloadURL { url, err in
-//                if let err = err {
-//                    self.loginStatusMessage = "Failed to retrieve downloadURL: \(err)"
-//                    return
-//                }
-//
-//                self.loginStatusMessage = "Successfully store image with url: \(url?.absoluteString ?? "")"
-//                print(url?.absoluteString ?? "")
-//
-//                guard let url = url else {return}
-//                self.storeUserInformation(imageProfileUrl: url)
-//
-//            }
-//        }
-    }
     
-    private func storeUserInformation(imageProfileUrl: URL) {
-//        guard let uid = FirebaseManager.shared.auth.currentUser?.uid
-//        else {return}
-//        let userData = ["email": self.email, "uid": uid, "profileImageURL": imageProfileUrl.absoluteString]
-//        FirebaseManager.shared.firestore.collection("users")
-//            .document(uid).setData(userData) { err in
-//                if let err = err {
-//                    print(err)
-//                    self.loginStatusMessage = "\(err)"
-//                    return
-//                }
-//                self.loginStatusMessage = "Successfully store user info"
-//
-//                self.didCompleteLoginProcess()
-//            }
-//    }
+    //        friend.saveInBackground { (successful, error) -> Void in
+    //            if successful {
+    //                print("yes")
+    //            }
+    //            else
+    //            {
+    //                print("no")
+    //
+    //            }
+    //        }
+    //        if self.image == nil {
+    //            self.loginStatusMessage = "You must select an image"
+    //            return
+    //        }
+    //        FirebaseManager.shared.auth.createUser(withEmail: email, password: password) {
+    //            result, err in
+    //            if let err = err {
+    //                print("Failed to create usr:", err)
+    //                self.loginStatusMessage = "Failed to Create usr: \(err)"
+    //                return
+    //            }
+    //
+    //            print("Successfully Create usr: \(result?.user.uid ?? "")")
+    //            self.loginStatusMessage = "Successfully Created to Create usr: \(result?.user.uid ?? "")"
+    //
+    //            self.persistImageToStorage()
+    //
+    //        }
+}
+
+private func persistImageToStorage() {
+    ////        let filename = UUID().uuidString
+    //        guard let uid = FirebaseManager.shared.auth.currentUser?.uid
+    //        else {return}
+    //        let ref = FirebaseManager.shared.storage.reference(withPath: uid)
+    //        guard let imageData = self.image?.jpegData(compressionQuality: 0.5)
+    //        else{return}
+    //        ref.putData(imageData, metadata: nil) { metadata, err in
+    //            if let err = err {
+    //                self.loginStatusMessage = "Failed to push image to Storage: \(err)"
+    //                return
+    //            }
+    //
+    //            ref.downloadURL { url, err in
+    //                if let err = err {
+    //                    self.loginStatusMessage = "Failed to retrieve downloadURL: \(err)"
+    //                    return
+    //                }
+    //
+    //                self.loginStatusMessage = "Successfully store image with url: \(url?.absoluteString ?? "")"
+    //                print(url?.absoluteString ?? "")
+    //
+    //                guard let url = url else {return}
+    //                self.storeUserInformation(imageProfileUrl: url)
+    //
+    //            }
+    //        }
+}
+
+private func storeUserInformation(imageProfileUrl: URL) {
+    //        guard let uid = FirebaseManager.shared.auth.currentUser?.uid
+    //        else {return}
+    //        let userData = ["email": self.email, "uid": uid, "profileImageURL": imageProfileUrl.absoluteString]
+    //        FirebaseManager.shared.firestore.collection("users")
+    //            .document(uid).setData(userData) { err in
+    //                if let err = err {
+    //                    print(err)
+    //                    self.loginStatusMessage = "\(err)"
+    //                    return
+    //                }
+    //                self.loginStatusMessage = "Successfully store user info"
+    //
+    //                self.didCompleteLoginProcess()
+    //            }
+    //    }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(didCompleteLoginProcess: {
-            
-        })
+        LoginView()
     }
 }
